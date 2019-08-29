@@ -12,6 +12,7 @@
         <module>report-jasper-reports-application-model</module>
         <module>report-jasper-reports</module>
         <module>report-jasper-reports-configuration</module>
+        <module>report-jasper-reports-example</module>
     </modules>
     <packaging>pom</packaging>
 
