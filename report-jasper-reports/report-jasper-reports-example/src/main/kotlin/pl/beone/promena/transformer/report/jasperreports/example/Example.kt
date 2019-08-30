@@ -9,7 +9,7 @@ fun transform(): Transformation {
     // HTTP: localhost:8080
     // Repeat: 1
     // Concurrency: 1
-    // Data: simple-all-parameters-and-fields.jrxml
+    // Data: simple-all-parameters-and-fields.jrxml | MediaType: text/xml
 
     return reportJasperReportsTransformation(reportJasperReportsParameters(createRecords(), createParameters()))
 }
