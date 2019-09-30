@@ -6,12 +6,12 @@ import pl.beone.promena.transformer.report.jasperreports.applicationmodel.model.
 object JasperReportsReportParametersConstants {
 
     object Records {
-        const val NAME = "RECORDS"
+        const val NAME = "records"
         val CLASS = getClazz<List<JasperReportsRecord>>()
     }
 
     object Parameters {
-        const val NAME = "PARAMETERS"
+        const val NAME = "parameters"
         val CLASS = JasperReportsParameters::class.java
     }
 
