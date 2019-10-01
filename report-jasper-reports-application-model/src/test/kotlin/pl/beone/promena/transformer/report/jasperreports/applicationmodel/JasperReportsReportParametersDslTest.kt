@@ -3,6 +3,7 @@ package pl.beone.promena.transformer.report.jasperreports.applicationmodel
 import io.kotlintest.shouldBe
 import io.kotlintest.shouldThrow
 import org.junit.jupiter.api.Test
+import pl.beone.promena.transformer.report.jasperreports.applicationmodel.model.emptyJasperReportsParameters
 import pl.beone.promena.transformer.report.jasperreports.applicationmodel.model.jasperReportsParameters
 import pl.beone.promena.transformer.report.jasperreports.applicationmodel.model.jasperReportsRecord
 
@@ -19,6 +20,7 @@ class JasperReportsReportParametersDslTest {
             shouldThrow<NoSuchElementException> {
                 it.getParameters()
             }
+            it.getParametersOrDefault(emptyJasperReportsParameters()) shouldBe emptyJasperReportsParameters()
         }
     }
 

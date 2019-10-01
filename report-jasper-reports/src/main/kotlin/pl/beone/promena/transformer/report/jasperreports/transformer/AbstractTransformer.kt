@@ -11,8 +11,9 @@ import pl.beone.promena.transformer.contract.data.TransformedDataDescriptor
 import pl.beone.promena.transformer.contract.data.singleTransformedDataDescriptor
 import pl.beone.promena.transformer.contract.model.Data
 import pl.beone.promena.transformer.contract.model.Parameters
-import pl.beone.promena.transformer.report.jasperreports.applicationmodel.getParameters
+import pl.beone.promena.transformer.report.jasperreports.applicationmodel.getParametersOrDefault
 import pl.beone.promena.transformer.report.jasperreports.applicationmodel.getRecords
+import pl.beone.promena.transformer.report.jasperreports.applicationmodel.model.emptyJasperReportsParameters
 import java.io.OutputStream
 
 internal abstract class AbstractTransformer {
@@ -37,11 +38,7 @@ internal abstract class AbstractTransformer {
 
     // Mutability is required by JasperReports
     private fun getMutableReportParameters(parameters: Parameters): Map<String, Any> =
-        try {
-            parameters.getParameters().elements.toMutableMap()
-        } catch (e: NoSuchElementException) {
-            HashMap()
-        }
+        parameters.getParametersOrDefault(emptyJasperReportsParameters()).elements.toMutableMap()
 
     // Mutability is required by JasperReports
     private fun getMutableReportRecords(parameters: Parameters): List<Map<String, Any>> =
