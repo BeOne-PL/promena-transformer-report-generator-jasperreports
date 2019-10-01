@@ -31,6 +31,7 @@ class JasperReportsReportParametersDslTest {
         jasperReportsReportParameters(records = records, parameters = parameters).let {
             it.getRecords() shouldBe records
             it.getParameters() shouldBe parameters
+            it.getParametersOrDefault(emptyJasperReportsParameters()) shouldBe parameters
         }
     }
 }
