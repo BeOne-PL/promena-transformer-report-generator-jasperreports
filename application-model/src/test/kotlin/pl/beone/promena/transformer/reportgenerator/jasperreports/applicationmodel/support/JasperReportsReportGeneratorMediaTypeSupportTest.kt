@@ -8,7 +8,7 @@ import pl.beone.promena.transformer.applicationmodel.mediatype.MediaTypeConstant
 import pl.beone.promena.transformer.applicationmodel.mediatype.MediaTypeConstants.APPLICATION_PDF
 import pl.beone.promena.transformer.applicationmodel.mediatype.MediaTypeConstants.TEXT_PLAIN
 import pl.beone.promena.transformer.applicationmodel.mediatype.MediaTypeConstants.TEXT_XML
-import pl.beone.promena.transformer.applicationmodel.mediatype.mediaType
+import pl.beone.promena.transformer.applicationmodel.mediatype.withCharset
 import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.JasperReportsReportGeneratorSupport.MediaTypeSupport.isSupported
 import kotlin.text.Charsets.ISO_8859_1
 
@@ -24,7 +24,7 @@ class JasperReportsReportGeneratorMediaTypeSupportTest {
     @Test
     fun isSupported2() {
         shouldNotThrow<TransformationNotSupportedException> {
-            isSupported(mediaType(APPLICATION_OCTET_STREAM.mimeType, ISO_8859_1), APPLICATION_PDF)
+            isSupported(APPLICATION_OCTET_STREAM.withCharset(ISO_8859_1), APPLICATION_PDF)
         }
     }
 
@@ -38,7 +38,7 @@ class JasperReportsReportGeneratorMediaTypeSupportTest {
     @Test
     fun isSupported4() {
         shouldNotThrow<TransformationNotSupportedException> {
-            isSupported(mediaType(TEXT_XML.mimeType, ISO_8859_1), APPLICATION_PDF)
+            isSupported(TEXT_XML.withCharset(ISO_8859_1), APPLICATION_PDF)
         }
     }
 
