@@ -8,12 +8,13 @@ object JasperReportsReportGeneratorParametersConstants {
 
     object Records {
         const val NAME = "records"
-        val CLASS =
-            getClazz<List<JasperReportsRecord>>()
+        @JvmField
+        val CLASS = getClazz<List<JasperReportsRecord>>()
     }
 
     object Parameters {
         const val NAME = "parameters"
+        @JvmField
         val CLASS = JasperReportsParameters::class.java
     }
 }

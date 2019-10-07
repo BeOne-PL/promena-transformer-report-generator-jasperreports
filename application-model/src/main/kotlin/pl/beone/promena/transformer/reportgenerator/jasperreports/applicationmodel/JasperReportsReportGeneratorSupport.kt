@@ -12,6 +12,7 @@ import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmod
 
 object JasperReportsReportGeneratorSupport {
 
+    @JvmStatic
     fun isSupported(dataDescriptor: DataDescriptor, targetMediaType: MediaType, parameters: Parameters) {
         dataDescriptor.descriptors.forEach { (_, mediaType) -> MediaTypeSupport.isSupported(mediaType, targetMediaType) }
         ParametersSupport.isSupported(parameters)
@@ -23,6 +24,7 @@ object JasperReportsReportGeneratorSupport {
             APPLICATION_OCTET_STREAM.mimeType to APPLICATION_PDF
         )
 
+        @JvmStatic
         fun isSupported(mediaType: MediaType, targetMediaType: MediaType) {
             if (!supportedMimeType.contains(mediaType.mimeType to targetMediaType)) {
                 throw TransformationNotSupportedException.unsupportedMediaType(mediaType, targetMediaType)
@@ -31,6 +33,7 @@ object JasperReportsReportGeneratorSupport {
     }
 
     object ParametersSupport {
+        @JvmStatic
         fun isSupported(parameters: Parameters) {
             parameters.validate(Records.NAME, Records.CLASS, true)
             parameters.validate(
