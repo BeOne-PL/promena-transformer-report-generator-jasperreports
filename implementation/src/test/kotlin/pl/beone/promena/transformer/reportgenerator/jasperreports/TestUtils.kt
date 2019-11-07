@@ -12,12 +12,12 @@ import pl.beone.promena.transformer.applicationmodel.mediatype.MediaTypeConstant
 import pl.beone.promena.transformer.applicationmodel.mediatype.MediaTypeConstants.TEXT_XML
 import pl.beone.promena.transformer.contract.communication.CommunicationParameters
 import pl.beone.promena.transformer.contract.data.singleDataDescriptor
-import pl.beone.promena.transformer.contract.model.Data
 import pl.beone.promena.transformer.contract.model.Parameters
-import pl.beone.promena.transformer.internal.model.data.FileData
-import pl.beone.promena.transformer.internal.model.data.MemoryData
-import pl.beone.promena.transformer.internal.model.data.toFileData
-import pl.beone.promena.transformer.internal.model.data.toMemoryData
+import pl.beone.promena.transformer.contract.model.data.Data
+import pl.beone.promena.transformer.internal.model.data.file.FileData
+import pl.beone.promena.transformer.internal.model.data.file.toFileData
+import pl.beone.promena.transformer.internal.model.data.memory.MemoryData
+import pl.beone.promena.transformer.internal.model.data.memory.toMemoryData
 import pl.beone.promena.transformer.internal.model.metadata.emptyMetadata
 import pl.beone.promena.transformer.reportgenerator.jasperreports.util.getResourceAsBytes
 import kotlin.reflect.KClass

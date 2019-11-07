@@ -8,8 +8,8 @@ import net.sf.jasperreports.engine.data.JRMapCollectionDataSource
 import pl.beone.promena.transformer.contract.data.DataDescriptor
 import pl.beone.promena.transformer.contract.data.TransformedDataDescriptor
 import pl.beone.promena.transformer.contract.data.singleTransformedDataDescriptor
-import pl.beone.promena.transformer.contract.model.Data
 import pl.beone.promena.transformer.contract.model.Parameters
+import pl.beone.promena.transformer.contract.model.data.Data
 import pl.beone.promena.transformer.reportgenerator.jasperreports.JasperReportsReportGeneratorTransformerDefaultParameters
 import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.getParametersOrDefault
 import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.getRecords

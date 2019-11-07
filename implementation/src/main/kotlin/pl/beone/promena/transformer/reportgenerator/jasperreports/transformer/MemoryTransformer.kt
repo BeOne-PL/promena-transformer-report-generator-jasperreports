@@ -1,7 +1,7 @@
 package pl.beone.promena.transformer.reportgenerator.jasperreports.transformer
 
-import pl.beone.promena.transformer.contract.model.Data
-import pl.beone.promena.transformer.internal.model.data.memoryData
+import pl.beone.promena.transformer.contract.model.data.Data
+import pl.beone.promena.transformer.internal.model.data.memory.memoryData
 import pl.beone.promena.transformer.reportgenerator.jasperreports.JasperReportsReportGeneratorTransformerDefaultParameters
 import java.io.ByteArrayOutputStream
 import java.io.OutputStream
