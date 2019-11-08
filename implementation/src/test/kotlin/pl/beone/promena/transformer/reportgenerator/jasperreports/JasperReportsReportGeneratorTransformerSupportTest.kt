@@ -21,7 +21,7 @@ class JasperReportsReportGeneratorTransformerSupportTest {
         mockkStatic(JasperReportsReportGeneratorSupport::class)
         every { JasperReportsReportGeneratorSupport.isSupported(dataDescriptor, targetMediaType, parameters) } just Runs
 
-        JasperReportsReportGeneratorTransformer(mockk(), mockk())
+        JasperReportsReportGeneratorTransformer(mockk(), mockk(), mockk())
             .isSupported(dataDescriptor, targetMediaType, parameters)
 
         verify(exactly = 1) { JasperReportsReportGeneratorSupport.isSupported(dataDescriptor, targetMediaType, parameters) }

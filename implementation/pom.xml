@@ -18,9 +18,6 @@
     <properties>
         <report-generator-jasperreport.version>1.0.0</report-generator-jasperreport.version>
 
-        <communication.memory.model.version>1.0.0</communication.memory.model.version>
-        <promena-communication-file-model.version>1.0.0</promena-communication-file-model.version>
-
         <jasperreports.version>6.9.0</jasperreports.version>
         <itextpdf.version>5.5.13.1</itextpdf.version>
     </properties>
@@ -39,17 +36,6 @@
             <groupId>pl.beone.promena.transformer</groupId>
             <artifactId>report-generator-jasperreport-application-model</artifactId>
             <version>${report-generator-jasperreport.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>pl.beone.promena.communication.memory.model</groupId>
-            <artifactId>promena-communication-memory-model-internal</artifactId>
-            <version>${communication.memory.model.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>pl.beone.promena.communication.file.model</groupId>
-            <artifactId>promena-communication-file-model-internal</artifactId>
-            <version>${promena-communication-file-model.version}</version>
         </dependency>
 
         <dependency>

@@ -1,4 +1,4 @@
-package pl.beone.promena.transformer.reportgenerator.jasperreports.transformer
+package pl.beone.promena.transformer.reportgenerator.jasperreports.processor
 
 import net.sf.jasperreports.engine.JRDataSource
 import net.sf.jasperreports.engine.JasperCompileManager
@@ -10,6 +10,7 @@ import pl.beone.promena.transformer.contract.data.TransformedDataDescriptor
 import pl.beone.promena.transformer.contract.data.singleTransformedDataDescriptor
 import pl.beone.promena.transformer.contract.model.Parameters
 import pl.beone.promena.transformer.contract.model.data.Data
+import pl.beone.promena.transformer.contract.model.data.WritableData
 import pl.beone.promena.transformer.reportgenerator.jasperreports.JasperReportsReportGeneratorTransformerDefaultParameters
 import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.getParametersOrDefault
 import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.getRecords
@@ -18,37 +19,37 @@ import java.io.OutputStream
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
-internal abstract class AbstractTransformer(
+internal class Processor(
     private val defaultParameters: JasperReportsReportGeneratorTransformerDefaultParameters
 ) {
 
-    protected abstract fun getOutputStream(): OutputStream
-
-    protected abstract fun createData(): Data
-
-    fun transform(singleDataDescriptor: DataDescriptor.Single, parameters: Parameters): TransformedDataDescriptor.Single {
+    fun process(
+        singleDataDescriptor: DataDescriptor.Single,
+        parameters: Parameters,
+        transformedWritableData: WritableData
+    ): TransformedDataDescriptor.Single {
         val (data, _, metadata) = singleDataDescriptor
 
         val timeout = parameters.getTimeoutOrNull() ?: defaultParameters.timeout
         if (timeout != null) {
             Executors.newSingleThreadExecutor()
-                .submit { generate(data, parameters) }
+                .submit { generate(data, parameters, transformedWritableData.getOutputStream()) }
                 .get(timeout.toMillis(), TimeUnit.MILLISECONDS)
         } else {
-            generate(data, parameters)
+            generate(data, parameters, transformedWritableData.getOutputStream())
         }
 
-        return singleTransformedDataDescriptor(createData(), metadata)
+        return singleTransformedDataDescriptor(transformedWritableData, metadata)
     }
 
-    private fun generate(data: Data, parameters: Parameters) {
+    private fun generate(data: Data, parameters: Parameters, outputStream: OutputStream) {
         val jasperPrint = JasperFillManager.fillReport(
             JasperCompileManager.compileReport(data.getInputStream()),
             getMutableReportParameters(parameters),
             getMutableReportRecords(parameters).toJRDataSource()
         )
 
-        JasperExportManager.exportReportToPdfStream(jasperPrint, getOutputStream())
+        JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream)
     }
 
     // Mutability is required by JasperReports

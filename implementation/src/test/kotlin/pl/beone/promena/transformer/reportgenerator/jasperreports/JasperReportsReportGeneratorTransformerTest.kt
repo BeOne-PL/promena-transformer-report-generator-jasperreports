@@ -73,7 +73,7 @@ class JasperReportsReportGeneratorTransformerTest {
 
     @Test
     fun transform_allSet() {
-        memoryTest(
+        test(
             jasperReportsReportGeneratorParameters(records = record + record2, parameters = parameters),
             assertElement,
             listOf(assertElement, assertElement2)
@@ -82,7 +82,7 @@ class JasperReportsReportGeneratorTransformerTest {
 
     @Test
     fun transform_emptyFirstRecord() {
-        memoryTest(
+        test(
             jasperReportsReportGeneratorParameters(records = emptyRecord + record2, parameters = parameters),
             assertElement,
             listOf(assertEmptyElement, assertElement2)
@@ -91,7 +91,7 @@ class JasperReportsReportGeneratorTransformerTest {
 
     @Test
     fun transform_emptyParameters() {
-        memoryTest(
+        test(
             jasperReportsReportGeneratorParameters(records = listOf(record2), parameters = emptyParameters),
             assertEmptyElement,
             listOf(assertElement2)
@@ -100,7 +100,7 @@ class JasperReportsReportGeneratorTransformerTest {
 
     @Test
     fun transform_noParameters() {
-        memoryTest(
+        test(
             jasperReportsReportGeneratorParameters(records = listOf(record2)),
             assertEmptyElement,
             listOf(assertElement2)
@@ -109,7 +109,7 @@ class JasperReportsReportGeneratorTransformerTest {
 
     @Test
     fun transform_emptyParametersAndEmptyRecord() {
-        memoryTest(
+        test(
             jasperReportsReportGeneratorParameters(records = listOf(emptyRecord), parameters = emptyParameters),
             assertEmptyElement,
             listOf(assertEmptyElement)
@@ -121,7 +121,7 @@ class JasperReportsReportGeneratorTransformerTest {
     @Test
     fun transform_zeroTimeout_shouldThrowTimeoutException() {
         shouldThrow<TimeoutException> {
-            memoryTest(
+            test(
                 jasperReportsReportGeneratorParameters(records = emptyList()) addTimeout Duration.ZERO,
                 "",
                 emptyList()
@@ -129,7 +129,7 @@ class JasperReportsReportGeneratorTransformerTest {
         }
 
         shouldThrow<TimeoutException> {
-            memoryTest(
+            test(
                 jasperReportsReportGeneratorParameters(records = emptyList()),
                 "",
                 emptyList(),

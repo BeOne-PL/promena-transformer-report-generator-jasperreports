@@ -3,79 +3,39 @@ package pl.beone.promena.transformer.reportgenerator.jasperreports
 import com.itextpdf.text.pdf.PdfReader
 import com.itextpdf.text.pdf.parser.PdfTextExtractor
 import io.kotlintest.matchers.collections.shouldHaveSize
-import io.kotlintest.matchers.instanceOf
 import io.kotlintest.matchers.withClue
 import io.kotlintest.shouldBe
-import pl.beone.promena.communication.file.model.internal.fileCommunicationParameters
-import pl.beone.promena.communication.memory.model.internal.memoryCommunicationParameters
+import io.mockk.mockk
 import pl.beone.promena.transformer.applicationmodel.mediatype.MediaTypeConstants.APPLICATION_PDF
 import pl.beone.promena.transformer.applicationmodel.mediatype.MediaTypeConstants.TEXT_XML
 import pl.beone.promena.transformer.contract.communication.CommunicationParameters
+import pl.beone.promena.transformer.contract.communication.CommunicationWritableDataCreator
 import pl.beone.promena.transformer.contract.data.singleDataDescriptor
 import pl.beone.promena.transformer.contract.model.Parameters
 import pl.beone.promena.transformer.contract.model.data.Data
-import pl.beone.promena.transformer.internal.model.data.file.FileData
-import pl.beone.promena.transformer.internal.model.data.file.toFileData
-import pl.beone.promena.transformer.internal.model.data.memory.MemoryData
+import pl.beone.promena.transformer.contract.model.data.WritableData
+import pl.beone.promena.transformer.internal.model.data.memory.emptyMemoryWritableData
 import pl.beone.promena.transformer.internal.model.data.memory.toMemoryData
 import pl.beone.promena.transformer.internal.model.metadata.emptyMetadata
 import pl.beone.promena.transformer.reportgenerator.jasperreports.util.getResourceAsBytes
-import kotlin.reflect.KClass
 
-private val simpleAllParametersAndFieldsBytes = getResourceAsBytes("/template/simple-all-parameters-and-fields.jrxml")
+private object MemoryCommunicationWritableDataCreator : CommunicationWritableDataCreator {
+    override fun create(communicationParameters: CommunicationParameters): WritableData = emptyMemoryWritableData()
+}
 
-internal fun memoryTest(
+private val data = getResourceAsBytes("/template/simple-all-parameters-and-fields.jrxml").toMemoryData()
+
+internal fun test(
     parameters: Parameters,
     assertParametersLine: String,
     assertRecordLines: List<String>,
     defaultParameters: JasperReportsReportGeneratorTransformerDefaultParameters = JasperReportsReportGeneratorTransformerDefaultParameters()
 ) {
-    test(
-        simpleAllParametersAndFieldsBytes.toMemoryData(),
-        MemoryData::class,
-        memoryCommunicationParameters(),
-        parameters,
-        assertParametersLine,
-        assertRecordLines,
-        defaultParameters
-    )
-}
-
-internal fun fileTest(
-    parameters: Parameters,
-    assertParametersLine: String,
-    assertRecordLines: List<String>,
-    defaultParameters: JasperReportsReportGeneratorTransformerDefaultParameters = JasperReportsReportGeneratorTransformerDefaultParameters()
-) {
-    val directory = createTempDir()
-
-    test(
-        simpleAllParametersAndFieldsBytes.inputStream().toFileData(directory),
-        FileData::class,
-        fileCommunicationParameters(directory),
-        parameters,
-        assertParametersLine,
-        assertRecordLines,
-        defaultParameters
-    )
-}
-
-private fun test(
-    data: Data,
-    dataClass: KClass<*>,
-    communicationParameters: CommunicationParameters,
-    parameters: Parameters,
-    assertParametersLine: String,
-    assertRecordLines: List<String>,
-    defaultParameters: JasperReportsReportGeneratorTransformerDefaultParameters
-) {
-    JasperReportsReportGeneratorTransformer(defaultParameters, communicationParameters)
+    JasperReportsReportGeneratorTransformer(defaultParameters, mockk(), MemoryCommunicationWritableDataCreator)
         .transform(singleDataDescriptor(data, TEXT_XML, emptyMetadata()), APPLICATION_PDF, parameters).let { transformedDataDescriptor ->
             withClue("Transformed data should contain only <1> element") { transformedDataDescriptor.descriptors shouldHaveSize 1 }
 
             transformedDataDescriptor.descriptors[0].let {
-                withClue("Transformed data should be instance of <$dataClass>") { it.data shouldBe instanceOf(dataClass) }
-
                 val lines = it.data.getLines()
                 withClue("Data should contain (parameters + SEPARATOR + record) lines") { lines shouldHaveSize 2 + assertRecordLines.size }
 
