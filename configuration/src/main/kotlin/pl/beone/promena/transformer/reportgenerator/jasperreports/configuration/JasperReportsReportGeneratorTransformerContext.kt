@@ -16,7 +16,6 @@ class JasperReportsReportGeneratorTransformerContext {
         defaultParameters: JasperReportsReportGeneratorTransformerDefaultParameters,
         @Qualifier("internalCommunicationParameters") communicationParameters: CommunicationParameters,
         @Qualifier("internalCommunicationWritableDataCreator") communicationWritableDataCreator: CommunicationWritableDataCreator
-
     ) =
         JasperReportsReportGeneratorTransformer(
             defaultParameters,
