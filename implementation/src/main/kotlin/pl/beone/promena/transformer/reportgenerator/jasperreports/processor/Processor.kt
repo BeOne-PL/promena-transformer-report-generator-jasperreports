@@ -1,5 +1,6 @@
 package pl.beone.promena.transformer.reportgenerator.jasperreports.processor
 
+import kotlinx.coroutines.asCoroutineDispatcher
 import net.sf.jasperreports.engine.JRDataSource
 import net.sf.jasperreports.engine.JasperCompileManager
 import net.sf.jasperreports.engine.JasperExportManager
@@ -15,13 +16,15 @@ import pl.beone.promena.transformer.reportgenerator.jasperreports.JasperReportsR
 import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.getParametersOrDefault
 import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.getRecords
 import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.model.emptyJasperReportsParameters
+import pl.beone.promena.transformer.util.execute
 import java.io.OutputStream
 import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
 
 internal class Processor(
     private val defaultParameters: JasperReportsReportGeneratorTransformerDefaultParameters
 ) {
+
+    private val executionDispatcher = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
 
     fun process(
         singleDataDescriptor: DataDescriptor.Single,
@@ -30,12 +33,7 @@ internal class Processor(
     ): TransformedDataDescriptor.Single {
         val (data, _, metadata) = singleDataDescriptor
 
-        val timeout = parameters.getTimeoutOrNull() ?: defaultParameters.timeout
-        if (timeout != null) {
-            Executors.newSingleThreadExecutor()
-                .submit { generate(data, parameters, transformedWritableData.getOutputStream()) }
-                .get(timeout.toMillis(), TimeUnit.MILLISECONDS)
-        } else {
+        execute(parameters.getTimeoutOrNull() ?: defaultParameters.timeout, executionDispatcher) {
             generate(data, parameters, transformedWritableData.getOutputStream())
         }
 
