@@ -8,6 +8,7 @@ import pl.beone.promena.transformer.applicationmodel.mediatype.MediaType
 import pl.beone.promena.transformer.contract.data.DataDescriptor
 import pl.beone.promena.transformer.contract.model.Parameters
 import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.JasperReportsReportGeneratorSupport
+import pl.beone.promena.transformer.reportgenerator.jasperreports.util.createJasperReportsReportGeneratorTransformer
 
 @ExtendWith(DockerExtension::class)
 class JasperReportsReportGeneratorTransformerSupportTest {
@@ -21,7 +22,7 @@ class JasperReportsReportGeneratorTransformerSupportTest {
         mockkStatic(JasperReportsReportGeneratorSupport::class)
         every { JasperReportsReportGeneratorSupport.isSupported(dataDescriptor, targetMediaType, parameters) } just Runs
 
-        JasperReportsReportGeneratorTransformer(mockk(), mockk(), mockk())
+        createJasperReportsReportGeneratorTransformer()
             .isSupported(dataDescriptor, targetMediaType, parameters)
 
         verify(exactly = 1) { JasperReportsReportGeneratorSupport.isSupported(dataDescriptor, targetMediaType, parameters) }

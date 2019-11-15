@@ -1,4 +1,4 @@
-package pl.beone.promena.transformer.reportgenerator.jasperreports
+package pl.beone.promena.transformer.reportgenerator.jasperreports.util
 
 import com.itextpdf.text.pdf.PdfReader
 import com.itextpdf.text.pdf.parser.PdfTextExtractor
@@ -17,11 +17,23 @@ import pl.beone.promena.transformer.contract.model.data.WritableData
 import pl.beone.promena.transformer.internal.model.data.memory.emptyMemoryWritableData
 import pl.beone.promena.transformer.internal.model.data.memory.toMemoryData
 import pl.beone.promena.transformer.internal.model.metadata.emptyMetadata
-import pl.beone.promena.transformer.reportgenerator.jasperreports.util.getResourceAsBytes
+import pl.beone.promena.transformer.reportgenerator.jasperreports.JasperReportsReportGeneratorTransformer
+import pl.beone.promena.transformer.reportgenerator.jasperreports.JasperReportsReportGeneratorTransformerDefaultParameters
 
 private object MemoryCommunicationWritableDataCreator : CommunicationWritableDataCreator {
     override fun create(communicationParameters: CommunicationParameters): WritableData = emptyMemoryWritableData()
 }
+
+internal fun createJasperReportsReportGeneratorTransformer(
+    defaultParameters: JasperReportsReportGeneratorTransformerDefaultParameters = JasperReportsReportGeneratorTransformerDefaultParameters(),
+    communicationParameters: CommunicationParameters = mockk(),
+    communicationWritableDataCreator: CommunicationWritableDataCreator = MemoryCommunicationWritableDataCreator
+): JasperReportsReportGeneratorTransformer =
+    JasperReportsReportGeneratorTransformer(
+        defaultParameters,
+        communicationParameters,
+        communicationWritableDataCreator
+    )
 
 private val data = getResourceAsBytes("/template/simple-all-parameters-and-fields.jrxml").toMemoryData()
 
@@ -31,7 +43,7 @@ internal fun test(
     assertRecordLines: List<String>,
     defaultParameters: JasperReportsReportGeneratorTransformerDefaultParameters = JasperReportsReportGeneratorTransformerDefaultParameters()
 ) {
-    JasperReportsReportGeneratorTransformer(defaultParameters, mockk(), MemoryCommunicationWritableDataCreator)
+    createJasperReportsReportGeneratorTransformer()
         .transform(singleDataDescriptor(data, TEXT_XML, emptyMetadata()), APPLICATION_PDF, parameters).let { transformedDataDescriptor ->
             withClue("Transformed data should contain only <1> element") { transformedDataDescriptor.descriptors shouldHaveSize 1 }
 

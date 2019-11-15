@@ -9,6 +9,7 @@ import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmod
 import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.model.emptyJasperReportsParameters
 import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.model.emptyJasperReportsRecord
 import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.model.plus
+import pl.beone.promena.transformer.reportgenerator.jasperreports.util.test
 import java.math.BigDecimal
 import java.sql.Time
 import java.sql.Timestamp
