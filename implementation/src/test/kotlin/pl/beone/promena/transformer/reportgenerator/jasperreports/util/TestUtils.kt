@@ -43,20 +43,22 @@ internal fun test(
     assertRecordLines: List<String>,
     defaultParameters: JasperReportsReportGeneratorTransformerDefaultParameters = JasperReportsReportGeneratorTransformerDefaultParameters()
 ) {
-    createJasperReportsReportGeneratorTransformer()
-        .transform(singleDataDescriptor(data, TEXT_XML, emptyMetadata()), APPLICATION_PDF, parameters).let { transformedDataDescriptor ->
-            withClue("Transformed data should contain only <1> element") { transformedDataDescriptor.descriptors shouldHaveSize 1 }
+    with(
+        createJasperReportsReportGeneratorTransformer(defaultParameters)
+            .transform(singleDataDescriptor(data, TEXT_XML, emptyMetadata()), APPLICATION_PDF, parameters)
+    ) {
+        withClue("Transformed data should contain only <1> element") { descriptors shouldHaveSize 1 }
 
-            transformedDataDescriptor.descriptors[0].let {
-                val lines = it.data.getLines()
-                withClue("Data should contain (parameters + SEPARATOR + record) lines") { lines shouldHaveSize 2 + assertRecordLines.size }
+        with(descriptors[0]) {
+            val lines = data.getLines()
+            withClue("Data should contain (parameters + SEPARATOR + record) lines") { lines shouldHaveSize 2 + assertRecordLines.size }
 
-                withClue("Parameters line should contain <$assertParametersLine>") { lines[0] shouldBe assertParametersLine }
-                withClue("Records lines should contain <$assertRecordLines>") { lines.subList(2, lines.size) shouldBe assertRecordLines }
+            withClue("Parameters line should contain <$assertParametersLine>") { lines[0] shouldBe assertParametersLine }
+            withClue("Records lines should contain <$assertRecordLines>") { lines.subList(2, lines.size) shouldBe assertRecordLines }
 
-                it.metadata shouldBe emptyMetadata()
-            }
+            metadata shouldBe emptyMetadata()
         }
+    }
 }
 
 private fun Data.getLines(): List<String> =

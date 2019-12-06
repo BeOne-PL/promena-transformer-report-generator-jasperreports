@@ -15,12 +15,10 @@ class JasperReportsReportGeneratorParametersDslTest {
 
     @Test
     fun `jasperReportsReportGeneratorParameters _ default parameters`() {
-        jasperReportsReportGeneratorParameters(records = records).let {
-            it.getRecords() shouldBe records
-            shouldThrow<NoSuchElementException> {
-                it.getParameters()
-            }
-            it.getParametersOrDefault(emptyJasperReportsParameters()) shouldBe emptyJasperReportsParameters()
+        with(jasperReportsReportGeneratorParameters(records = records)) {
+            getRecords() shouldBe records
+            shouldThrow<NoSuchElementException> { getParameters() }
+            getParametersOrDefault(emptyJasperReportsParameters()) shouldBe emptyJasperReportsParameters()
         }
     }
 
@@ -28,10 +26,10 @@ class JasperReportsReportGeneratorParametersDslTest {
     fun `jasperReportsReportGeneratorParameters _ all parameters`() {
         val parameters = jasperReportsParameters(emptyMap())
 
-        jasperReportsReportGeneratorParameters(records = records, parameters = parameters).let {
-            it.getRecords() shouldBe records
-            it.getParameters() shouldBe parameters
-            it.getParametersOrDefault(emptyJasperReportsParameters()) shouldBe parameters
+        with(jasperReportsReportGeneratorParameters(records = records, parameters = parameters)) {
+            getRecords() shouldBe records
+            getParameters() shouldBe parameters
+            getParametersOrDefault(emptyJasperReportsParameters()) shouldBe parameters
         }
     }
 }
