@@ -22,6 +22,9 @@ fun Parameters.getRecords(): List<JasperReportsRecord> =
 fun Parameters.getParameters(): JasperReportsParameters =
     get(JasperReportsReportGeneratorParametersConstants.Parameters.NAME, JasperReportsReportGeneratorParametersConstants.Parameters.CLASS)
 
+fun Parameters.getParametersOrNull(): JasperReportsParameters? =
+    getOrNull(JasperReportsReportGeneratorParametersConstants.Parameters.NAME, JasperReportsReportGeneratorParametersConstants.Parameters.CLASS)
+
 fun Parameters.getParametersOrDefault(default: JasperReportsParameters): JasperReportsParameters =
     getOrDefault(
         JasperReportsReportGeneratorParametersConstants.Parameters.NAME,

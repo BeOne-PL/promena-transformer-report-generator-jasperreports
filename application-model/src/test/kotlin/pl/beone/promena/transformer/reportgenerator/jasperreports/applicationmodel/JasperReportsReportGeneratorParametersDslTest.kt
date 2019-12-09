@@ -18,6 +18,7 @@ class JasperReportsReportGeneratorParametersDslTest {
         with(jasperReportsReportGeneratorParameters(records = records)) {
             getRecords() shouldBe records
             shouldThrow<NoSuchElementException> { getParameters() }
+            getParametersOrNull() shouldBe null
             getParametersOrDefault(emptyJasperReportsParameters()) shouldBe emptyJasperReportsParameters()
         }
     }
