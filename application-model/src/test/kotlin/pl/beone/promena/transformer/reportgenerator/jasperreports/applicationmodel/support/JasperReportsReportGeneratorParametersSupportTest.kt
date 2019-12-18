@@ -5,14 +5,13 @@ import org.junit.jupiter.api.Test
 import pl.beone.promena.transformer.applicationmodel.exception.transformer.TransformationNotSupportedException
 import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.JasperReportsReportGeneratorSupport.ParametersSupport.isSupported
 import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.jasperReportsReportGeneratorParameters
-import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.model.jasperReportsParameters
-import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.model.jasperReportsRecord
+import java.io.Serializable
 
 class JasperReportsReportGeneratorParametersSupportTest {
 
     companion object {
-        private val records = listOf(jasperReportsRecord(emptyMap()))
-        private val parameters = jasperReportsParameters(emptyMap())
+        private val records = listOf(emptyMap<String, Serializable>())
+        private val parameters = emptyMap<String, Serializable>()
     }
 
     @Test

@@ -1,20 +1,19 @@
 package pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel
 
 import pl.beone.lib.typeconverter.internal.getClazz
-import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.model.JasperReportsParameters
-import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.model.JasperReportsRecord
+import java.io.Serializable
 
 object JasperReportsReportGeneratorParametersConstants {
 
     object Records {
         const val NAME = "records"
         @JvmField
-        val CLASS = getClazz<List<JasperReportsRecord>>()
+        val CLASS = getClazz<List<Map<String, Serializable>>>()
     }
 
     object Parameters {
         const val NAME = "parameters"
         @JvmField
-        val CLASS = JasperReportsParameters::class.java
+        val CLASS = getClazz<Map<String, Serializable>>()
     }
 }

@@ -3,14 +3,13 @@ package pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmo
 import io.kotlintest.shouldBe
 import io.kotlintest.shouldThrow
 import org.junit.jupiter.api.Test
-import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.model.emptyJasperReportsParameters
-import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.model.jasperReportsParameters
-import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.model.jasperReportsRecord
+import java.io.Serializable
 
 class JasperReportsReportGeneratorParametersDslTest {
 
     companion object {
-        private val records = listOf(jasperReportsRecord(emptyMap()))
+        private val records = listOf(emptyMap<String, Serializable>())
+        private val parameters = emptyMap<String, Serializable>()
     }
 
     @Test
@@ -19,18 +18,17 @@ class JasperReportsReportGeneratorParametersDslTest {
             getRecords() shouldBe records
             shouldThrow<NoSuchElementException> { getParameters() }
             getParametersOrNull() shouldBe null
-            getParametersOrDefault(emptyJasperReportsParameters()) shouldBe emptyJasperReportsParameters()
+            getParametersOrDefault(parameters) shouldBe parameters
         }
     }
 
     @Test
     fun `jasperReportsReportGeneratorParameters _ all parameters`() {
-        val parameters = jasperReportsParameters(emptyMap())
-
         with(jasperReportsReportGeneratorParameters(records = records, parameters = parameters)) {
             getRecords() shouldBe records
             getParameters() shouldBe parameters
-            getParametersOrDefault(emptyJasperReportsParameters()) shouldBe parameters
+            getParametersOrNull() shouldBe parameters
+            getParametersOrDefault(parameters) shouldBe parameters
         }
     }
 }

@@ -6,10 +6,8 @@ import org.junit.jupiter.api.extension.ExtendWith
 import pl.beone.lib.junit.jupiter.external.DockerExtension
 import pl.beone.promena.transformer.internal.model.parameters.addTimeout
 import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.jasperReportsReportGeneratorParameters
-import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.model.emptyJasperReportsParameters
-import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.model.emptyJasperReportsRecord
-import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.model.plus
 import pl.beone.promena.transformer.reportgenerator.jasperreports.util.test
+import java.io.Serializable
 import java.math.BigDecimal
 import java.sql.Time
 import java.sql.Timestamp
@@ -28,8 +26,8 @@ class JasperReportsReportGeneratorTransformerTest {
         private const val assertElement2 =
             "fieldValue false 11.1 12.2 13 14 15 16 12/17/93, 12:00 PM 5/3/91, 10:00 AM 10/10/91, 11:00 AM 1/1/00, 12:00 AM"
 
-        private val emptyParameters = emptyJasperReportsParameters()
-        private val parameters = emptyJasperReportsParameters() +
+        private val emptyParameters = emptyMap<String, Serializable>()
+        private val parameters = emptyMap<String, Serializable>() +
                 ("string" to "value") +
                 ("boolean" to true) +
                 ("double" to 1.1) +
@@ -43,8 +41,8 @@ class JasperReportsReportGeneratorTransformerTest {
                 ("sqlTime" to Time(213123321)) +
                 ("sqlTimestamp" to Timestamp(123123213))
 
-        private val emptyRecord = emptyJasperReportsRecord()
-        private val record = emptyJasperReportsRecord() +
+        private val emptyRecord = emptyMap<String, Serializable>()
+        private val record = emptyMap<String, Serializable>() +
                 ("string" to "value") +
                 ("boolean" to true) +
                 ("double" to 1.1) +
@@ -57,7 +55,7 @@ class JasperReportsReportGeneratorTransformerTest {
                 ("sqlDate" to java.sql.Date(1213213)) +
                 ("sqlTime" to Time(213123321)) +
                 ("sqlTimestamp" to Timestamp(123123213))
-        private val record2 = emptyJasperReportsRecord() +
+        private val record2 = emptyMap<String, Serializable>() +
                 ("string" to "fieldValue") +
                 ("boolean" to false) +
                 ("double" to 11.1) +
@@ -75,7 +73,7 @@ class JasperReportsReportGeneratorTransformerTest {
     @Test
     fun transform_allSet() {
         test(
-            jasperReportsReportGeneratorParameters(records = record + record2, parameters = parameters),
+            jasperReportsReportGeneratorParameters(records = listOf(record, record2), parameters = parameters),
             assertElement,
             listOf(assertElement, assertElement2)
         )
@@ -84,7 +82,7 @@ class JasperReportsReportGeneratorTransformerTest {
     @Test
     fun transform_emptyFirstRecord() {
         test(
-            jasperReportsReportGeneratorParameters(records = emptyRecord + record2, parameters = parameters),
+            jasperReportsReportGeneratorParameters(records = listOf(emptyRecord, record2), parameters = parameters),
             assertElement,
             listOf(assertEmptyElement, assertElement2)
         )

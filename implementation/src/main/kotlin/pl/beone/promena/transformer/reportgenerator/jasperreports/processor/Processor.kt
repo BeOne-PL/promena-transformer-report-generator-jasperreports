@@ -15,7 +15,6 @@ import pl.beone.promena.transformer.contract.model.data.WritableData
 import pl.beone.promena.transformer.reportgenerator.jasperreports.JasperReportsReportGeneratorTransformerDefaultParameters
 import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.getParametersOrDefault
 import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.getRecords
-import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.model.emptyJasperReportsParameters
 import pl.beone.promena.transformer.util.execute
 import java.io.OutputStream
 import java.util.concurrent.Executors
@@ -52,11 +51,11 @@ internal class Processor(
 
     // Mutability is required by JasperReports
     private fun getMutableReportParameters(parameters: Parameters): Map<String, Any> =
-        parameters.getParametersOrDefault(emptyJasperReportsParameters()).elements.toMutableMap()
+        parameters.getParametersOrDefault(emptyMap()).toMutableMap()
 
     // Mutability is required by JasperReports
     private fun getMutableReportRecords(parameters: Parameters): List<Map<String, Any>> =
-        parameters.getRecords().map { it.elements.toMutableMap() }
+        parameters.getRecords().map { it.toMutableMap() }
 
     private fun <T> List<Map<String, T>>.toJRDataSource(): JRDataSource =
         JRMapCollectionDataSource(this)

@@ -3,7 +3,7 @@ package pl.beone.promena.transformer.reportgenerator.jasperreports.example
 import pl.beone.promena.transformer.contract.transformation.Transformation
 import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.jasperReportsReportGeneratorParameters
 import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.jasperReportsReportGeneratorTransformation
-import pl.beone.promena.transformer.reportgenerator.jasperreports.applicationmodel.model.*
+import java.io.Serializable
 
 fun promena(): Transformation {
     // Data: simple-all-parameters-and-fields.jrxml | MediaType: text/xml
@@ -11,9 +11,11 @@ fun promena(): Transformation {
     return jasperReportsReportGeneratorTransformation(jasperReportsReportGeneratorParameters(createRecords(), createParameters()))
 }
 
-private fun createRecords(): List<JasperReportsRecord> =
-    (emptyJasperReportsRecord() + ("string" to "value") + ("boolean" to true)) +
-            (emptyJasperReportsRecord() + ("string" to "value2"))
+private fun createRecords(): List<Map<String, Serializable>> =
+    listOf(
+        emptyMap<String, Serializable>() + ("string" to "value") + ("boolean" to true),
+        emptyMap<String, Serializable>() + ("string" to "value2")
+    )
 
-private fun createParameters(): JasperReportsParameters =
-    emptyJasperReportsParameters() + ("string" to "value3")
+private fun createParameters(): Map<String, Serializable> =
+    emptyMap<String, Serializable>() + ("string" to "value3")
