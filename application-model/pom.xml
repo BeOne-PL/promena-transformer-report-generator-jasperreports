@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>pl.beone.promena.transformer</groupId>
-    <artifactId>report-generator-jasperreport-application-model</artifactId>
+    <artifactId>report-generator-jasperreports-application-model</artifactId>
     <version>1.0.0</version>
 
     <dependencies>

@@ -12,11 +12,11 @@
     </parent>
 
     <groupId>pl.beone.promena.transformer</groupId>
-    <artifactId>report-generator-jasperreport</artifactId>
+    <artifactId>report-generator-jasperreports</artifactId>
     <version>1.0.0</version>
 
     <properties>
-        <report-generator-jasperreport.version>1.0.0</report-generator-jasperreport.version>
+        <report-generator-jasperreports.version>1.0.0</report-generator-jasperreports.version>
 
         <jasperreports.version>6.9.0</jasperreports.version>
         <itextpdf.version>5.5.13.1</itextpdf.version>
@@ -39,8 +39,8 @@
 
         <dependency>
             <groupId>pl.beone.promena.transformer</groupId>
-            <artifactId>report-generator-jasperreport-application-model</artifactId>
-            <version>${report-generator-jasperreport.version}</version>
+            <artifactId>report-generator-jasperreports-application-model</artifactId>
+            <version>${report-generator-jasperreports.version}</version>
         </dependency>
 
         <dependency>

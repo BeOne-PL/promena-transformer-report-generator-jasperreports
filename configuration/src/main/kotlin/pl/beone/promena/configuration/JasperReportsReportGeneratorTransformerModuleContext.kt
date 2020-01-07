@@ -6,5 +6,5 @@ import org.springframework.context.annotation.PropertySource
 
 @Configuration
 @ComponentScan(basePackages = ["pl.beone.promena.transformer.reportgenerator.jasperreports.configuration"])
-@PropertySource("classpath:transformer-report-generator-jasperreport.properties")
+@PropertySource("classpath:transformer-report-generator-jasperreports.properties")
 class JasperReportsReportGeneratorTransformerModuleContext
