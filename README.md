@@ -1,10 +1,10 @@
 # Promena Transformer - `report generator - JasperReports`
 This transformer provides functionality to generate a report based on a template using JasperReports 6.9.0.
 
-Visit [Promena#Transformer](https://gitlab.office.beone.pl/promena/promena#transformer) to understand the repository structure.
+Visit [Promena#Transformer](https://github.com/BeOne-PL/promena#transformer) to understand the repository structure.
 
 ## Transformation [`JasperReportsReportGeneratorDsl`](./application-model/src/main/kotlin/pl/beone/promena/transformer/reportgenerator/jasperreports/applicationmodel/JasperReportsReportGeneratorDsl.kt), [`JasperReportsReportGeneratorParametersDsl`](./application-model/src/main/kotlin/pl/beone/promena/transformer/reportgenerator/jasperreports/applicationmodel/JasperReportsReportGeneratorParametersDsl.kt)
-The [`DataDescriptor`](https://gitlab.office.beone.pl/promena/promena/blob/master/base/promena-transformer/contract/src/main/kotlin/pl/beone/promena/transformer/contract/data/DataDescriptor.kt) has to contain at least one descriptor with a JasperReports template. If more than one descriptor is passed, the transformation will be performed on each of them separately.
+The [`DataDescriptor`](https://github.com/BeOne-PL/promena/blob/master/base/promena-transformer/contract/src/main/kotlin/pl/beone/promena/transformer/contract/data/DataDescriptor.kt) has to contain at least one descriptor with a JasperReports template. If more than one descriptor is passed, the transformation will be performed on each of them separately.
 
 ## Support [`JasperReportsReportGeneratorSupport`](./application-model/src/main/kotlin/pl/beone/promena/transformer/reportgenerator/jasperreports/applicationmodel/JasperReportsReportGeneratorSupport.kt)
 ### Media type [`JasperReportsReportGeneratorSupport.MediaTypeSupport`](./application-model/src/main/kotlin/pl/beone/promena/transformer/reportgenerator/jasperreports/applicationmodel/JasperReportsReportGeneratorSupport.kt)
