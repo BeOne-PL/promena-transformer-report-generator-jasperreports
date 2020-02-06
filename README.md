@@ -20,7 +20,7 @@ The [`DataDescriptor`](https://github.com/BeOne-PL/promena/blob/master/base/prom
 <dependency>
     <groupId>pl.beone.promena.transformer</groupId>
     <artifactId>report-generator-jasperreports-configuration</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
@@ -29,7 +29,7 @@ The [`DataDescriptor`](https://github.com/BeOne-PL/promena/blob/master/base/prom
 <dependency>
     <groupId>pl.beone.promena.transformer</groupId>
     <artifactId>report-generator-jasperreports</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 

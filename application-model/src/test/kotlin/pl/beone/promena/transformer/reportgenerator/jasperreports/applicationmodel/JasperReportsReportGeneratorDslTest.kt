@@ -9,7 +9,7 @@ class JasperReportsReportGeneratorDslTest {
 
     @Test
     fun jasperReportsReportGeneratorTransformation() {
-        with(jasperReportsReportGeneratorTransformation(jasperReportsReportGeneratorParameters(records = emptyList()))) {
+        with(jasperReportsReportGeneratorTransformation(APPLICATION_PDF, jasperReportsReportGeneratorParameters(records = emptyList()))) {
             transformerId shouldBe TRANSFORMER_ID
             targetMediaType shouldBe APPLICATION_PDF
             parameters.getAll().size shouldBe 1

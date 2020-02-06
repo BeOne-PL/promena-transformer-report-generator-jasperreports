@@ -13,10 +13,10 @@
 
     <groupId>pl.beone.promena.transformer</groupId>
     <artifactId>report-generator-jasperreports-example</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <properties>
-        <report-generator-jasperreports.version>1.0.0</report-generator-jasperreports.version>
+        <report-generator-jasperreports.version>1.0.1</report-generator-jasperreports.version>
     </properties>
 
     <dependencies>
