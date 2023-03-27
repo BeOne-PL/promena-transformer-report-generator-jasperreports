@@ -19,7 +19,7 @@
         <report-generator-jasperreports.version>1.0.1</report-generator-jasperreports.version>
 
         <jasperreports.version>6.9.0</jasperreports.version>
-        <itextpdf.version>5.5.13.1</itextpdf.version>
+        <itextpdf.version>5.5.13.3</itextpdf.version>
     </properties>
 
     <dependencies>
